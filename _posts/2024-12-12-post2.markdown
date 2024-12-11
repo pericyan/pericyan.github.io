@@ -1,0 +1,13 @@
+---
+layout: post
+title: fgets/fputs
+date: 2024-12-12 04:06:00 +0900
+category: C/C++
+---
+# post-sample
+> Hello!
+
+This is code
+```ruby
+print 'hello world'
+```
