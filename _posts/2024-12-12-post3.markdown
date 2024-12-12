@@ -1,0 +1,172 @@
+---
+layout: post
+title: (C언어) fprintf/fscanf
+date: 2024-12-12 16:31:00 +0900
+category: C
+---
+일반 스트림 입출력 합수 중에서 fprintf와 fscanf는 텍스트가 일정한 형식을 따라야 하는 경우에 사용된다.
+
+# fprintf
+
+### 1. 구조
+```c
+#include <stdio.h>
+int fprintf(FILE *stream, const char *format-string, argument-list);
+```
+
+fprintf는 특정 포맷을 따르는 문자열을 스트림으로 출력하기 위해 사용하는 함수이다.
+매개변수는 (파일 포인터), (문자열 포맷), (포맷에 들어갈 인자들)이며, 스트림으로 출력한 문자 수를 반환한다.
+에러 발생 시에는 -1을 반환한다.
+
+### 2. 예제
+(입력받은 점수를 sample.txt 파일로 저장하기)
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define SNAME_LEN 50
+
+int main(){
+    int s_num; // 학번
+    float score; // 점수
+    char s_name[SNAME_LEN + 1]; // 이름
+    char *f_name = "score.txt"; // 텍스트 파일명
+    FILE *fp = NULL; // 파일 포인터
+
+    if((fp = fopen(f_name, "w")) == NULL){ // 파일 포인터 쓰기 모드로 열기
+        fprintf(stderr, "파일 %s을 열 수 없습니다.\n", f_name);
+        exit(1);
+    }
+    printf("----------------\n");
+    while(1){
+        printf("학번(음수면 종료): ");
+        scanf("%d", &s_num);
+        getchar(); // 입력 버퍼 "\n" 제거
+        if(s_num < 0)
+            break; // 음수면 반복문 종료
+
+        printf("이름: ");
+        fgets(s_name, SNAME_LEN + 1, stdin);
+        s_name[strcspn(s_name, "\n")] = '\0';
+
+        printf("점수: ");
+        scanf("%f", &score);
+        getchar(); // 입력 버퍼 "\n" 제거
+
+        fprintf(fp, "%d %s %f\n", s_num, s_name, score);
+        printf("----------------\n");
+    }
+
+    fclose(fp); // 파일 포인터 닫기
+
+    return 0;
+}
+```
+위 코드는 학생의 학번, 이름, 성적을 score.txt 파일에 저장하는 프로그램이다. fopen으로 파일 열기에 실패한 경우 fprintf로 '파일을 열 수 없다'는 에러 메세지를 stderr 스트림으로 전달한다.
+stderr는 stdout과 마찬가지로 화면에 에러 메세지를 표시하지만, 버퍼를 사용하지 않는다는 차이점이 있다.
+
+---
+
+# fscanf
+
+### 1. 구조
+
+```c
+#include <stdio.h>
+int fscanf (FILE *stream, const char *format-string, argument-list);
+```
+
+fscanf는 스트림에서 문자열 형식을 통해 값을 가져올 떄 사용하는 함수이다.
+매개변수는 (파일 포인터), (문자열 포맷), (포맷으로부터 가져올 인자들)이며, 성공적으로 읽어들인 필드 수를 반환한다. 예를 들어, 문자열 포맷이 "%d %s"이고 str, num을 읽어들이는데 성공했다면 반환값은 2이다.
+만약 파일 포인터가 파일 끝에 도달했거나 오류가 발생하면 -1(EOF)를 반환한다.
+
+### 2. 예제
+
+(sample.txt 파일에서 불러온 학생 점수 평균 구하기)
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#define SNAME_LEN 50
+
+int main(){
+    int s_num;                      // 학번
+    int count = 0;                  // 총 학생 수
+    float avg;                      // 점수 평균
+    float score;                    // 점수
+    float total = 0.0;              // 점수 합산
+    char s_name[SNAME_LEN + 1];     // 학생 이름
+    const char *f_name = "sample.txt";    // 파일명
+    FILE *fp = NULL;                // 파일 포인터
+
+    if((fp = fopen(f_name, "r")) == NULL){
+        fprintf(stderr, "파일 %s을 열 수 없습니다.\n", f_name);
+        exit(1);
+    }
+
+    while(fscanf(fp, "%d %s %f\n", &s_num, s_name, &score) == 3){
+        total += score;
+        count++;
+    }
+
+    if(count > 0){
+        avg = total / count;
+        printf("점수 평균: %.2f\n", avg);
+    }else
+        printf("학생 정보가 존재하지 않습니다.\n");
+
+    fclose(fp);
+
+    return 0;
+}
+```
+sample.txt에 저장된 (학번) (이름) (점수)를 fscanf로 반복해서 불러온다. 앞서 설명했던대로 fscanf는 읽어들인 필드 수를 반환하기 떄문에 읽어들이는데 성공했다면 3을 반복해서 반환할 것이다. 따라서 오류가 발생하거나 EOF에 도달했을 경우를 감지하기 위해서는 while문 내에 fscanf를 위치시키고 반환값이 3인지 확인하면 된다.
+
+---
+
+# feof
+### 1. 구조
+```c
+#include <stdio.h>
+int feof(FILE *stream);
+```
+feof는 파일 포인터를 인자로 받고, EOF 플래그가 설정된 경우에 0을 리턴한다. 그렇지 않은 경우에는 0이 아닌 값을 리턴한다.
+
+### 2. 예제
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define BUFFER_SIZE 100
+
+int main(){
+    int line_num = 1;
+    const char *fname = "sample.txt";
+    char buffer[BUFFER_SIZE];
+    FILE *fp = NULL;
+
+    if((fp = fopen(fname, "r")) == NULL){
+        fpirntf(stderr, "파일 %s을 열 수 없습니다.\n", fname);
+        exit(1);
+    }
+
+    while(!feof(fp)){
+        if(fgets(buffer, BUFFER_SIZE, fp) != NULL) // 한 줄씩 읽기
+            printf("%d: %s", line_num++, buffer);
+    }
+
+    fclose(fp);
+
+    return 0;
+}
+```
+fp는 fgets로 인해 한줄씩 이동하며 feof는 반복적으로 0을 반환하고, 결국 텍스트 파일 마지막(EOF)에 도달했을 때 foef는 0이 아닌 값을 반환하게 된다.
+
+*(EOF 미도달 시: !feof(fp)가 1 반환)*
+
+*(EOF 도달 시: !feof(fp)가 0 반환)*
+
+<br>
+
+**`주의: !는 논리적 NOT 연산자로 0이 아닌 모든 값을 0으로, 0을 1로 변환한다. ~는 비트 단위의 NOT 연산자로 비트 0과 1을 반전시킨다.`**
