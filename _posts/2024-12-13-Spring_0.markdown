@@ -1,0 +1,143 @@
+---
+layout: post
+title: "[Spring - 0편] JDK 설치 및 VSCODE 프로젝트 생성"
+date: 2024-12-13 02:11:00 +0900
+category: Spring
+---
+<br>
+이 포스트는 Apple silicon 맥북을 기준으로 한다.
+<br>
+<br>
+Spring 학습을 위해 JDK를 설치하고 JAVA 버전을 변경해야 하며, spring initializr로 프로젝트를 생성하기 때문에 Java 버전 17, 21, 23 중 하나를 설치하면 된다. 이번 프로젝트에서는 JDK 23을 사용한다. ([openJDK 버전 23 다운][install-openJDK]{:target="_blank"})
+
+# 0. JDK 폴더 이동
+
+<br>
+
+```bash
+$cd ~/Library/Java/JavaVirtualMachines/
+```
+
+다운받은 JDK 폴더를 위 경로에 이동시킨다. (아래 그림 참조)
+
+<br>
+
+<img src="/assets/img/Spring/Spring-0-0.png">
+
+<br>
+
+---
+
+
+# 1. 환경 변수 설정
+
+<br>
+
+```bash
+$vim ~/.zshrc
+```
+
+'i'를 눌러 insert 모드 진입 후, 아래 코드를 추가한다.
+
+```bash
+export JAVA_HOME=$(/usr/libexec/java_home -v 23)
+```
+'esc'로 insert 모드를 해제하고, ':wq'를 눌러 빠져나온다.
+
+```bash
+> $source ~/.zshrc
+```
+
+.zshrc의 변경 사항 적용 후, 버전이 23으로 변경된 것을 확인할 수 잇다.
+
+```bash
+$java -version
+```
+
+<br>
+
+---
+
+# 2. VScode 프로젝트 생성
+
+<br>
+
+Visual Studio Code의 extension 중에서 'Extension Pack for Java'과 'Spring Initializr Java Support' 이 2개를 설치한다.
+
+이후 Ctrl + Shift + p를 눌러서 Command Palette를 열고 다음 단계를 따른다.
+1. Java 프로젝트 생성
+2. Spring Boot 선택
+3. Gradle 프로젝트 선택
+4. 최신 버전 선택
+5. 프로그래밍 언어 JAVA 선택
+6. Group Id 임의로 기입
+7. Artifact Id 임의로 기입
+8. War 선택 (웹 기반)
+9. Java 버전 23 선택
+10. dependencies "Spring Web", "Thymeleaf" 선택
+11. 엔터 시, 프로젝트 생성
+
+<br>
+
+- Java 프로젝트 생성
+<img src="/assets/img/Spring/Spring-0-1.png">
+
+<br>
+
+- Spring Boot 선택
+<img src="/assets/img/Spring/Spring-0-2.png">
+
+<br>
+
+- Gradle 프로젝트 선택
+<img src="/assets/img/Spring/Spring-0-3.png">
+
+<br>
+
+- 최신 버전 선택
+<img src="/assets/img/Spring/Spring-0-4.png">
+
+<br>
+
+- 프로그래밍 언어 JAVA 선택
+<img src="/assets/img/Spring/Spring-0-5.png">
+
+<br>
+
+- Group Id 임의로 기입
+<img src="/assets/img/Spring/Spring-0-6.png">
+
+<br>
+
+- Artifact Id 임의로 기입
+<img src="/assets/img/Spring/Spring-0-7.png">
+
+<br>
+
+- War 선택 (웹 기반)
+<img src="/assets/img/Spring/Spring-0-8.png">
+
+<br>
+
+- Java 버전 23 선택
+<img src="/assets/img/Spring/Spring-0-9.png">
+
+<br>
+
+- dependencies "Spring Web", "Thymeleaf" 선택
+<img src="/assets/img/Spring/Spring-0-10.png">
+<img src="/assets/img/Spring/Spring-0-11.png">
+
+<br>
+
+- 엔터 시, 프로젝트 생성
+
+<img src="/assets/img/Spring/Spring-0-12.png">
+
+<br>
+
+위 과정을 완료하면 Spring 프로젝트의 준비는 끝났다.
+
+<br>
+
+[install-openJDK]: https://jdk.java.net/23/
