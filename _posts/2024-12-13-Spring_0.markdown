@@ -22,7 +22,7 @@ $cd ~/Library/Java/JavaVirtualMachines/
 
 <br>
 
-<img src="/assets/img/Spring/Spring-0-0.png">
+<img src="/assets/img/Spring/0/Spring-0-0.png">
 
 <br>
 
@@ -80,59 +80,59 @@ Visual Studio Code의 extension 중에서 'Extension Pack for Java'과 'Spring I
 <br>
 
 - Java 프로젝트 생성
-<img src="/assets/img/Spring/Spring-0-1.png">
+<img src="/assets/img/Spring/0/Spring-0-1.png">
 
 <br>
 
 - Spring Boot 선택
-<img src="/assets/img/Spring/Spring-0-2.png">
+<img src="/assets/img/Spring/0/Spring-0-2.png">
 
 <br>
 
 - Gradle 프로젝트 선택
-<img src="/assets/img/Spring/Spring-0-3.png">
+<img src="/assets/img/Spring/0/Spring-0-3.png">
 
 <br>
 
 - 최신 버전 선택
-<img src="/assets/img/Spring/Spring-0-4.png">
+<img src="/assets/img/Spring/0/Spring-0-4.png">
 
 <br>
 
 - 프로그래밍 언어 JAVA 선택
-<img src="/assets/img/Spring/Spring-0-5.png">
+<img src="/assets/img/Spring/0/Spring-0-5.png">
 
 <br>
 
 - Group Id 임의로 기입
-<img src="/assets/img/Spring/Spring-0-6.png">
+<img src="/assets/img/Spring/0/Spring-0-6.png">
 
 <br>
 
 - Artifact Id 임의로 기입
-<img src="/assets/img/Spring/Spring-0-7.png">
+<img src="/assets/img/Spring/0/Spring-0-7.png">
 
 <br>
 
 - War 선택 (웹 기반)
-<img src="/assets/img/Spring/Spring-0-8.png">
+<img src="/assets/img/Spring/0/Spring-0-8.png">
 
 <br>
 
 - Java 버전 23 선택
-<img src="/assets/img/Spring/Spring-0-9.png">
+<img src="/assets/img/Spring/0/Spring-0-9.png">
 
 <br>
 
 - dependencies "Spring Web", "Thymeleaf" 선택
-<img src="/assets/img/Spring/Spring-0-10.png">
-<img src="/assets/img/Spring/Spring-0-11.png">
+<img src="/assets/img/Spring/0/Spring-0-10.png">
+<img src="/assets/img/Spring/0/Spring-0-11.png">
 
 <br>
 
 - 엔터 시, 프로젝트 생성
 
-<img src="/assets/img/Spring/Spring-0-12.png">
+<img src="/assets/img/Spring/0/Spring-0-12.png">
 
 <br>
 

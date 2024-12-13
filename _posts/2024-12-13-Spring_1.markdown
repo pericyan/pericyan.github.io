@@ -1,0 +1,92 @@
+---
+layout: post
+title: "[Spring - 1편] Spring 실행"
+date: 2024-12-13 05:10:00 +0900
+category: Spring
+---
+
+# 0. 에러 발생
+
+<br>
+
+VScode 상에서 Spring 프로젝트의 메인 파일과 테스트 파일을 열었을 때 에러가 표시되었다. (하...)
+
+<br>
+
+<img src="/assets/img/Spring/1/Spring-1-0.png">
+
+<br>
+
+에러 메세지:
+```bash
+The declared package "hello.hello_spring" does not match the expected package ""Java(536871240)
+```
+
+
+<br>
+
+---
+
+# 1. settings.json 편집
+
+<br>
+
+우선 JDK가 잘못 사용되고 있는건 아닌가하고 command palette(command + shift + p)를 통해 "java:Configure Java Runtime" 항목으로 들어갔고, VSCode가 다른 디렉토리 경로를 인식하고 있다는 사실을 알아냈다.
+
+VScode에서 JDK 경로를 직접 설정하기 위해서는 아래와 같이 하면 된다.
+
+<br>
+
+<img src="/assets/img/Spring/1/Spring-1-1.png">
+
+> Code > Preferences > Settings의 검색창에서 Java:home을 입력하고 'Edit in settings.json'을 클릭한다.
+
+<br>
+
+<img src="/assets/img/Spring/1/Spring-1-2.png">
+
+> 컴퓨터에 설치된 jdk 23의 절대 경로를 "java.jdt.ls.java.home" 항목에 위와 같이 추가한다. (../jdk/Contents/Home 까지 기입할 것)
+
+> jdk의 설치 경로를 쉽게 복사하려면 콘솔창에서 "pwd"를 치면 된다.
+
+<br>
+
+---
+
+# 2. 껐다 켜기
+
+<br>
+
+jdk 경로가 제대로 인식되었는데도 표시가 사라지지 않았다. 꽤 오랫동안 구글링과 삽질을 반복하다가 [이 블로그][blog-link]{:target="_blank"}에서 VSCode를 껐다가 키면 해결된다는 글을 보고 혹시나 싶어서 시도해보았다.
+
+<br>
+
+<img src="/assets/img/Spring/1/Spring-1-3.png">
+
+<br>
+
+빨간줄이 사라졌다^^
+
+<br>
+
+---
+
+# 3. Spring 실행
+
+<br>
+
+<img src="/assets/img/Spring/1/Spring-1-4.png">
+
+<br>
+
+VSCode에서는 **"Run Code"**가 아니라 **"Run Java"**로 실행해야 Spring이 제대로 실행된다. 실행 이후에 웹 브라우저에서 "localhost:8080"로 웹 사이트가 제대로 실행되는지 확인할 수 있다.
+
+<br>
+
+만약, Spring이 제대로 실행되고 있다면 아래 사진처럼 "Whitelabel Error Page"라는 문구가 보일 것이다.
+
+<br>
+
+<img src="/assets/img/Spring/1/Spring-1-5.png">
+
+[blog-link]: https://dogcowking.tistory.com/370
