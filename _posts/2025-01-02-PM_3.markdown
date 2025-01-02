@@ -1,0 +1,300 @@
+---
+layout: post
+title: "[생산관리 데이터분석 - 3편] "
+date: 2025-01-02 15:23:00 +0900
+category: PM_Data_Analysis
+---
+
+# Numpy Array
+
+## 1. 배열 생성
+### 1.1 행 기준, 1차원 행렬
+```python
+import numpy as np
+
+A = np.array([1, 2, 3])
+
+print(A) # [1 2 3]
+
+print("A type: " %type(A))
+print("A Shape: " %A.shape)
+print("A dim: " %A.ndim)
+```
+결과:
+```json
+[1 2 3]
+A type :  <class 'numpy.ndarray'>
+A Shape :  (3,)
+A dim :  1
+```
+
+<br>
+
+### 1.2 2차원 배열
+```python
+B = np.array([[1, 2, 3], [4, 5, 6]])
+print(B)
+print("B type: ", type(B))
+print("B Shape: ", B.shape)
+print("B dim: ", B.ndim)
+```
+결과:
+```json
+[[1 2 3]
+ [4 5 6]]
+B type:  <class 'numpy.ndarray'>
+B Shape:  (2, 3)
+B dim:  2
+```
+
+<br>
+
+### 1.3 열 기준, 1차원 배열
+``` python
+C = np.array([[1, 2, 3]])
+print(C)
+print("C type: ", type(C))
+print("C Shape: ", C.shape)
+print("C dim: ", C.ndim)
+```
+결과:
+```json
+[[1 2 3]]
+C type:  <class 'numpy.ndarray'>
+C Shape:  (1, 3)
+C dim:  2
+```
+
+<br>
+
+### 1.4 영행렬 / 1행렬
+```python
+D = np.zeros((3, 4))
+E = np.ones((2, 3))
+F = np.zeros_like(E)
+print(D)
+print(E)
+print(F)
+```
+결과:
+```json
+[[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+[[1. 1. 1.]
+ [1. 1. 1.]]
+[[0. 0. 0.]
+ [0. 0. 0.]]
+```
+
+<br>
+
+### 1.5 특정 숫자로 배열 초기화
+```python
+G = np.full((3, 2), 7)
+print(G)
+```
+결과:
+```json
+[[7 7]
+ [7 7]
+ [7 7]]
+```
+
+<br>
+
+### 1.6 랜덤값 행렬
+```python
+H = random.random((4, 5)) # 0 ~ 1 사이의 랜덤값 할당
+print(H)
+```
+결과:
+```json
+[[0.27929709 0.93971638 0.85509409 0.47565424 0.40782289]
+ [0.60968632 0.81567995 0.01853135 0.98980496 0.18132168]
+ [0.0149458  0.7218437  0.73898007 0.28357137 0.4162097 ]
+ [0.82776968 0.75271717 0.44212178 0.48044724 0.8934208 ]]
+```
+<br>
+
+---
+
+<br>
+
+## 2. 배열 크기 변형
+### 2.1 연속적인 값을 가지는 1차원 행렬 생성(인자가 하나이면, 0부터 시작)
+```python
+A1 = np.arange(15)
+print(A1)
+```
+결과:
+```json
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
+```
+
+<br>
+
+### 2.2 행렬의 행과 열 수 전환
+```python
+A2 = A1.rehape(3, 5)
+print(A2)
+```
+결과:
+```json
+[[ 0  1  2  3  4]
+ [ 5  6  7  8  9]
+ [10 11 12 13 14]]
+```
+
+<br>
+
+### 2.3 행렬의 행과 열 수 전환(기준 전환)
+```python
+A3 = A1.reshape(3, 5, order = 'F')
+print(A3)
+```
+결과:
+```json
+[[ 0  3  6  9 12]
+ [ 1  4  7 10 13]
+ [ 2  5  8 11 14]]
+```
+
+<br>
+
+### 2.4 행이나 열을 모를 때
+```python
+A4 = A1.reshape(-1, 5)
+print(A4)
+```
+결과:
+```json
+[[ 0  1  2  3  4]
+ [ 5  6  7  8  9]
+ [10 11 12 13 14]]
+```
+
+<br>
+
+---
+
+<br>
+
+## 3. 배열 데이터 추출
+### 3.1 원소 추출
+```python
+A = np.arange(1, 13) # 1 ~ 12
+B = A.reshape(3, 4) # 행 개수: 3, 열 개수: 4
+
+V1 = B[0, 0]
+V2 = B[-1, -1]
+V3 = B[-1, -2]
+V4 = B[1, 2]
+
+print(A)
+print(B)
+print(V1, V2, V3, V4)
+```
+결과:
+```json
+ 1  2  3  4  5  6  7  8  9 10 11 12]
+[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+1 12 11 7
+```
+
+<br>
+
+### 3.2 범위로 원소 추출
+```python
+B1 = B[0:2, 0:2]
+B2 = B[:2, 0]
+B3 = B[-2:, -2]
+
+print(B1)
+print(B2)
+print(B3)
+```
+결과:
+```json
+[[1 2]
+ [5 6]]
+[1 5]
+[[ 7  8]
+ [11 12]]
+```
+
+<br>
+
+---
+
+<br>
+
+## 4. 선형 대수 기본 연산
+### 4.1 inner product(dot product)
+```python
+A1 = np.array([[1, 2, 3], [4, 5, 6]])
+A2 = np.array([[7, 8], [9, 10], [10, 11]])
+A3 = np.dot(A1, A2)
+
+print(A3)
+```
+결과:
+```json
+[[ 58  64]
+ [139 154]]
+```
+
+### 4.2 전치 행렬(행과 열 전환)
+```python
+A1T = np.transpose(A1)
+print(A1T)
+```
+결과:
+```json
+[[1 4]
+ [2 5]
+ [3 6]]
+```
+
+<br>
+
+---
+
+<br>
+
+## 5. Numpy 기술 통계
+```python
+np.random.seed(0)
+
+mu = 3.0
+sigma = 2.9
+
+X = np.random.normal(mu, sigma, 10000)
+
+print(X[:4])
+
+print("mean = " %np.mean(X))
+print("var = " %np.var(X))
+print("std = " %np.std(X))
+print("max = " %np.max(X))
+print("min = " %np.min(X))
+print("median = " %np.median(X))
+print("25% = " %np.percentile(X, 0.25))
+print("50% = " %np.percentile(X, 0.5))
+print("75% = " %np.percentile(X, 0.75))
+```
+결과:
+```json
+[8.1157518  4.1604559  5.83834015 9.49859028]
+mean =  2.946542211541029
+var =  8.202003672674971
+std =  2.86391404771075
+max =  14.024814623404634
+min =  -7.846291850060158
+median =  2.921489463079604
+25% =  0.9998503874488054
+50% =  2.921489463079604
+75% =  4.873658169840063
+```

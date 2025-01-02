@@ -2,7 +2,7 @@
 layout: post
 title: "[생산관리 데이터분석 - 0편] 생산관리의 기초 개념"
 date: 2024-12-29 05:08:00 +0900
-category: 생산관리 데이터분석
+category: PM_Data_Analysis
 ---
 
 # 0. 프로젝트 소개
